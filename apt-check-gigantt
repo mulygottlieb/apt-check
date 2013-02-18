@@ -132,6 +132,7 @@ def run(options=None):
         upgrades = upgrades + 1	
         if isSecurityUpgrade(cand_ver):
             security_updates += 1
+            sys.stderr.write("Security: %s\n" % pkg.Name)
             continue
 
         # now check for security updates that are masked by a 
@@ -142,6 +143,7 @@ def run(options=None):
                 continue
             if isSecurityUpgrade(ver):
                 security_updates += 1
+                sys.stderr.write("Security: %s\n" % pkg.Name)
                 break
 
     # print the number of upgrades
@@ -152,7 +154,7 @@ def run(options=None):
     else:
         # print the number of regular upgrades and the number of 
         # security upgrades
-        sys.stderr.write("%s;%s" % (upgrades,security_updates))
+        sys.stderr.write("%s;%s\n" % (upgrades,security_updates))
 
     # return the number of upgrades (if its used as a module)
     return(upgrades,security_updates)
